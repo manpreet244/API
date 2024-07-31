@@ -103,6 +103,20 @@ These are just conventions - it all depends on how the API is coded. To know whi
 ### Request URL
 In addition to a request method, a request must include a request URL that indicates where to make the API call. A request URL has three parts: a protocol (such as http:// or https://), host (location of the server), and path (route on the server). In REST APIs, the path often points to a reference entity, like "books".   
 ![image](https://github.com/user-attachments/assets/bf9729a4-30b1-4d9e-ae7d-c10bd55b4bb6)    
+### Response status codes
+The Postman Library API v2 has returned a response status code of "200 OK". Status codes are indicators of whether a request failed or succeeded.
+
+Status codes have conventions. For example, any status code starting with a "2xx" (a "200-level response") represents a successful call. Get familiar with other status code categories:
+![image](https://github.com/user-attachments/assets/9054497e-7ee9-402c-ada1-2a63ac59780e)   
+### Request-Response pattern
+Now you can understand the request response pattern, which represents how computers communicate over a network. An API is the interface that lets us know what kind of response to expect when we make certain calls to a server. 
+You made an HTTP GET request to https://library-api.postmanlabs.com/books and received a response from the server.
+The client is the agent making a request. A client could be a browser or an application you have coded, for example. In our case Postman is the client because that's how we sent the request. 
+The request is sent over a network to some server. In our case, we made a request over the public internet to a server located at the address https://library-api.postmanlabs.com. 
+The server interpreted the request (GET /books) and sent the appropriate response over the network back to the Postman client: a list of books.
+That's it!
+
+
 
 
 
