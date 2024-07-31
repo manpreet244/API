@@ -153,5 +153,5 @@ This request adds a search term as a query parameter q=postman ("q" refers to "q
 Because this parameter is in our request, the server returns an HTML document that is a search results page with hits for "Postman". The search bar is pre-populated with our query "Postman".
 
 Sometimes, query parameters are optional and allow you to add filters or extra data to your responses. Sometimes, they are required in order for the server to process your request. APIs are implemented differently to fulfill different needs. 
-https://github.com/user-attachments/assets/44f52bc8-23ff-4dff-97cb-46285665b87c
+[![asciicast](https://github.com/user-attachments/assets/44f52bc8-23ff-4dff-97cb-46285665b87c)
 
