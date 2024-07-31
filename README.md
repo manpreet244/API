@@ -115,12 +115,43 @@ The client is the agent making a request. A client could be a browser or an appl
 The request is sent over a network to some server. In our case, we made a request over the public internet to a server located at the address https://library-api.postmanlabs.com. 
 The server interpreted the request (GET /books) and sent the appropriate response over the network back to the Postman client: a list of books.
 That's it!
+### Variables in Postman
+Postman allows you to save values as variables to reuse them and easily hide sensitive information like API Keys. 
+We will use a variable to replace our base URL so that we don't have to type that repeatedly. Once a variable is defined, you can access its value using double curly brace syntax like this: {{variableName}}
+STEPS----
+1. Go to the "get books" request in your collection.
+2. With your cursor, select the entire base URL of the API (https://library-api.postmanlabs.com). Do not include the slash / after .com.
+3. Click "Set as variable" to save the base URL to a variable.
+![image](https://github.com/user-attachments/assets/df14ab7e-19b0-4f4f-9a9c-d420d2f4e247)
+
+![image](https://github.com/user-attachments/assets/4247adea-40c8-4f75-91be-6af03eaee054)
+
+Initial Value - the value initially set when someone forks or imports your collection. Note that if you share your collection with others, they will see this value, so don't put any secrets here!
+
+Current Value - Postman always resolves the variable to this value. This is local to your Postman account, and not public. It is good to keep secrets like API Keys ONLY in this column and not include them in the Initial Value column.
+
+### Query parameters
+Remember that the minimum ingredients you need to make a request are:
+
+a request method (GET/POST/PUT/PATCH/DELETE, etc)
+a request URL
+#### Some APIs allow you to refine your request further with key-value pairs called query parameters
+#### Query parameter syntax
+Query parameters are added to the end of the path. They start with a question mark ?, followed by the key-value pairs in the format: <key>=<value>. For example, this request might fetch all photos that have landscape orientation:
+GET https://some-api.com/photos?orientation=landscape
+
+If there are multiple query parameters, each is separated by an ampersand &. Below two query parameters to specify the orientation and size of the photos to be returned:
+GET https://some-api.com/photos?orientation=landscape&size=500x400
+Search Google - with query parameters!
+Try pasting this URL into your browser or as a GET request in Postman to make a Google search for "Postman". (If you use Postman, click the "Preview" tab in the response to view the rendered HTML!)
+
+https://www.google.com/search?q=postman
 
 
 
+This request adds a search term as a query parameter q=postman ("q" refers to "query" here) to the GET /search path on Google's server.
+Because this parameter is in our request, the server returns an HTML document that is a search results page with hits for "Postman". The search bar is pre-populated with our query "Postman".
 
-
-
-
-
+Sometimes, query parameters are optional and allow you to add filters or extra data to your responses. Sometimes, they are required in order for the server to process your request. APIs are implemented differently to fulfill different needs. 
+https://github.com/user-attachments/assets/44f52bc8-23ff-4dff-97cb-46285665b87c
 
