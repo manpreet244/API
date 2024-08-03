@@ -148,10 +148,95 @@ Try pasting this URL into your browser or as a GET request in Postman to make a 
 https://www.google.com/search?q=postman
 
 
+## Path Variable
+Another way of passing request data to an API is via path variables (a.k.a. "path parameters"). A path variable is a dynamic section of a path and is often used for IDs and entity names such as usernames. 
+
 
 This request adds a search term as a query parameter q=postman ("q" refers to "query" here) to the GET /search path on Google's server.
 Because this parameter is in our request, the server returns an HTML document that is a search results page with hits for "Postman". The search bar is pre-populated with our query "Postman".
 
-Sometimes, query parameters are optional and allow you to add filters or extra data to your responses. Sometimes, they are required in order for the server to process your request. APIs are implemented differently to fulfill different needs. 
-[![asciicast](https://github.com/user-attachments/assets/44f52bc8-23ff-4dff-97cb-46285665b87c)
+Sometimes, query parameters are optional and allow you to add filters or extra data to your responses. Sometimes, they are required in order for the server to process your request. APIs are implemented differently to fulfill different needs.     
 
+[![WATCH THIS VIDEO](https://github.com/user-attachments/assets/44f52bc8-23ff-4dff-97cb-46285665b87c)
+
+## Request Response Pattern   
+An API is the interface that lets us know what kind of response to expect when we make certain calls to a server.     
+You made an HTTP GET request to https://library-api.postmanlabs.com/books and received a response from the server.   
+![image](https://github.com/user-attachments/assets/0ed383fe-87c5-497d-a91e-01b687df7041)    
+
+The client is the agent making a request. A client could be a browser or an application you have coded, for example. In our case Postman is the client because that's how we sent the request.     
+The request is sent over a network to some server. In our case, we made a request over the public internet to a server located at the address https://library-api.postmanlabs.com   
+The server interpreted the request (GET /books) and sent the appropriate response over the network back to the Postman client: a list of books.    
+### Path Variable syntax
+The path variable comes immediately after a slash in the path. For example, the GitHub API allows you to search for GitHub users by providing a username in the path in place of {username} below: 
+### Path vs Query parameters
+
+
+![image](https://github.com/user-attachments/assets/9a703491-7d8d-4997-ae1e-abdf04f42bd4)
+
+### Get a book by id
+
+[![WATCH THIS VIDEO TO know how to get books using its id using a path variable](
+https://github.com/user-attachments/assets/66952c08-122c-4744-9471-506618ca66ce)
+
+## Sending a POST Request   
+Task: Add a book   
+A new bestseller book arrived! As a librarian, you wish to add that book to the library.
+In this lesson, we will learn how to add a book via POST request with a JSON Body to submit book data to our Postman Library API database.    
+But what is the Body?    
+You will need to send body data with requests whenever you need to add or update structured data. For example, if you're sending a request to add a new customer to a database, you might include the customer details in JSON data format. Typically, you will use body data with PUT, POST, and PATCH requests.     
+The Body tab in Postman enables you to specify the data you need to send with a request. You can send different types of body data to suit your API.
+
+You can use raw body data to send anything you can enter as text. Use the raw tab, and the type dropdown list to indicate the format of your data (Text, JavaScript, JSON, HTML, or XML), and Postman will enable syntax-highlighting and appending the relevant headers to your request.   
+
+[![WATCH THIS VIDEO TO know how to make a post request or how to add a book](https://github.com/user-attachments/assets/bc463fe5-d858-4993-8561-30b5995c9715)
+
+😱 Uh-oh!
+The response from the server came back with a status 401 Unauthorized. Remember that 400-level errors are client errors, meaning we made a mistake in our request as below:
+![image](https://github.com/user-attachments/assets/37438a2a-2568-4422-be57-c5bc6510982f)
+ Reason for the above error it that  
+Some APIs require Authorization (aka Auth) for certain endpoints in order to permit a request.
+-> Authorization is the process of verifying that a user or application has the right permissions to access a particular resource or perform a specific action. It typically follows authentication, which is the process of verifying the identity of the user or application.
+
+#### Common Authorization Methods
+1) API Keys:
+
+A simple string that is passed with the request to identify the client. API keys are often used for simple scenarios but lack fine-grained control.
+Example: api_key=your_api_key
+2)Bearer Tokens (OAuth 2.0):
+A more secure and flexible method where an access token is obtained after authentication and included in the request headers.
+Example: Authorization: Bearer your_access_token
+3)Basic Auth:
+Encodes the username and password in base64 and sends it in the request header.
+Example: Authorization: Basic base64encodedusername:password
+4)JWT (JSON Web Tokens):
+Tokens that are signed and can include user information and permissions. They are included in the request header.
+Example: Authorization: Bearer your_jwt_token
+Let us look into this    
+## Authorization
+Think about why you might not want an API to have completely open endpoints that anyone can access publicly. It would allow unauthorized people to access data they shouldn't see, or allow bots to flood an API with thousands of calls per second and shut it down. 
+There are multiple methods for authorizing a request. Some examples are Basic Auth (username and password), OAuth (delegated authorization), and API Keys (secret strings registered to a developer from an API portal).    
+#### Getting an API Key
+APIs that use API Key auth usually allow developers to sign up in a developer portal, where they will receive a random API Key that can be used to authorize their requests to the API. The API Key allows the API to track who is making calls and how often.  
+The Postman Library API v2 uses very light protection and does not require you to register for an API Key. You simply have to know it:
+
+Header name: api-key
+Header value: postmanrulz
+## Headers
+Headers are how we can add metadata about our requests, such as authorization information or specify the data type we want to receive in a response. This is different than the actual payload data we send in the body of a request, such as our new book information.
+
+You can think of headers like the outside of an envelope when you send a letter. The envelope has information about delivering the letter, like proof that you've paid for postage. The actual data "payload" is the letter inside the envelope.
+As the documentation shows, the Postman Library API v2 requires adding this header to any requests for adding, updating and deleting books, since these operations change data in the database instead of simply reading them.
+[![WATCH THIS VIDEO TO know how to add headers to a request](https://github.com/user-attachments/assets/121adc9b-4b98-4f8d-bf79-dbc340461479)
+
+🚀 Success!
+Your book was added! Now that your request is properly authorized in the header, you should get a 201 Created response with a response body that is an object representing your newly added book!
+Your new book has been assigned a random, unique id, and has extra information now, such as it's checkedOut status and when it was added to the library (createdAt)
+
+### There is an easier way by which we can add , api-key to postman by adding auth to the collection
+Before we use the Postman Auth helper, let's remove the hard-coded header we just added on the "add a book" request.Hover over the api-key header in the Headers tab and click the "x" icon at the right to delete the header. Save your request.
+## Add Auth to the Collection
+The Postman Auth helper can help you add authorization at the request, folder or collection level. Let's add the api-key to our entire collection so that all requests will send the key. 
+[![WATCH THIS VIDEO TO know how to addauthorisation](https://github.com/user-attachments/assets/6ff7e081-e8ef-4493-b98a-c895fa820b72)
+
+## Variable scopes
