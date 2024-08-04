@@ -240,3 +240,49 @@ The Postman Auth helper can help you add authorization at the request, folder or
 [![WATCH THIS VIDEO TO know how to addauthorisation](https://github.com/user-attachments/assets/6ff7e081-e8ef-4493-b98a-c895fa820b72)
 
 ## Variable scopes
+
+You can set variables that live at various scopes. Postman will resolve to the value at the nearest and narrowest scope.
+From broadest to narrowest, these scopes are global, collection, environment, data, and local.
+![image](https://github.com/user-attachments/assets/5310e004-2228-4c75-b598-0db8b57f5d80)
+## Setting variables programmatically
+### Scripting in Postman
+Postman allows you to add automation and dynamic behaviors to your collections with scripting.
+
+Postman will automatically execute any provided scripts during two events in the request flow:
+
+Immediately before a request is sent: pre-request script (Pre-request Script of Scripts tab).
+Immediately after a response comes back: post-response script (Post-response of Scripts tab).
+In this lesson, we will focus on writing scripts in the Post-response tab, which are executed when a response comes back from an API.
+
+### The pm object
+Postman has a helper object named pm that gives you access to data about your Postman environment, requests, responses, variables and testing utilities. 
+
+For example, you can access the JSON response body from an API with: 
+
+##### pm.response.json()
+
+You can also programmatically get collection variables like the value of baseUrl with:
+
+##### pm.collectionVariables.get(“baseUrl”)
+
+In addition to getting variables, you can also set them with pm.collectionVariables.set("variableName", "variableValue") like this:
+
+##### pm.collectionVariables.set(“myVar”, “foo”)
+
+Get ready!
+
+In the next task, we will use scripting and the pm object to set a new book's automatically id as a collection variable so we can use the id in other requests.
+
+### Setting and getting collection variables
+The pm object allows you to set and get collection variables.
+
+To set a collection variable, use the .set() method with two parameters: the variable name and the variable value
+
+pm.collectionVariables.set("variableName", value)
+
+To get a collection variable use the .get() method and specify the name of the variable you want to retrieve:
+
+pm.collectionVariables.get("variableName")
+##### Set the new book id as a variable 
+[![WATCH THIS VIDEO TO know how to set variable](https://github.com/user-attachments/assets/b63fcb3f-7a32-4b37-9280-68d0e6e0df61
+)
